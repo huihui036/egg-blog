@@ -4,7 +4,7 @@
  * @Autor: qinghui
  * @Date: 2021-12-04 09:27:31
  * @LastEditors: qinghui
- * @LastEditTime: 2021-12-12 14:10:20
+ * @LastEditTime: 2022-01-09 15:17:16
  */
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 
@@ -33,13 +33,18 @@ export default (appInfo: EggAppInfo) => {
       expiresIn: 1 * 60 * 60 * 24,
     },
   };
-  config.routerAuth = [ '/user/login', '/user/register', '/blog/columns' ];
+  config.routerAuth = [
+    '/user/getUserData',
+    '/blog/addColumns',
+    '/blog/createPost',
+    '/blog/column',
+  ];
 
 
   config.mongoose = {
     client: {
       url: 'mongodb://127.0.0.1:27017/egg-mongo',
-      options: {},
+      options: { useFindAndModify: false },
     },
   };
 
@@ -56,11 +61,10 @@ export default (appInfo: EggAppInfo) => {
     produces: [ 'application/json' ], // 指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回
     securityDefinitions: {
       //  配置接口安全授权方式
-      Bearer: {
+      apikey: {
         type: 'apiKey',
         name: 'Authorization',
         in: 'header',
-        description: 'HTTP/HTTPS Bearer',
       },
       // apikey: {
       //   type: 'apiKey',

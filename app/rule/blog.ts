@@ -4,7 +4,7 @@
  * @Autor: qinghui
  * @Date: 2021-12-12 14:24:12
  * @LastEditors: qinghui
- * @LastEditTime: 2021-12-12 15:09:31
+ * @LastEditTime: 2021-12-26 12:39:27
  */
 const columnRule = {
   title: {
@@ -16,4 +16,29 @@ const columnRule = {
     allowEmpty: false,
   },
 };
-export { columnRule };
+
+const upDatacolumnRule = {
+  columnId: {
+    type: 'string',
+    allowEmpty: false,
+  },
+
+};
+
+const createPostRule = {
+
+  title: {
+    type: 'string',
+    allowEmpty: false,
+  },
+  content: {
+    type: 'string',
+    allowEmpty: false,
+  },
+  column: {
+    type: 'string',
+    allowEmpty: false,
+  },
+};
+
+export { columnRule, createPostRule, upDatacolumnRule };

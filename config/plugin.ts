@@ -4,7 +4,7 @@
  * @Autor: qinghui
  * @Date: 2021-12-04 09:27:31
  * @LastEditors: qinghui
- * @LastEditTime: 2021-12-11 18:36:06
+ * @LastEditTime: 2021-12-26 11:06:46
  */
 import { EggPlugin } from 'egg';
 
@@ -20,6 +20,7 @@ const plugin: EggPlugin = {
   },
   mongoose: {
     enable: true, // 开启插件
+
     package: 'egg-mongoose',
   },
   jwt: {

@@ -4,10 +4,11 @@
  * @Autor: qinghui
  * @Date: 2021-12-04 09:45:28
  * @LastEditors: qinghui
- * @LastEditTime: 2021-12-12 17:11:15
+ * @LastEditTime: 2022-01-09 10:33:51
  */
 import { HttpExceptions, HttpParameterExceptions } from './exceptions';
 import { ErrorData } from '../interface/general';
+
 module.exports = (options, app) => {
 
   function httpRest(err, error, ctx) {
@@ -18,6 +19,7 @@ module.exports = (options, app) => {
       error.msg = err.msg;
       error.code = err.code;
       error.data = err.data;
+      error.errsInfo = err.errsInfo;
     } else if (err instanceof HttpParameterExceptions) {
       error.requestUrl = `${ctx.method} : ${ctx.path}`;
       error.msg = '参数错误';
@@ -41,15 +43,17 @@ module.exports = (options, app) => {
       requestUrl: '/',
       msg: '',
       code: 0,
-      errsInfo: '',
+      errsInfo: [],
       data: '',
     };
 
     // 判断当前路由是否需要验证token
     const flag = app.config.routerAuth.includes(ctx.url);
+
+
     try {
       const { authorization } = ctx.header;
-      if (flag) {
+      if (!flag) {
         await next();
       } else {
         if (!authorization) {

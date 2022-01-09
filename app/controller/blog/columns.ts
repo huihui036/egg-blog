@@ -4,24 +4,37 @@
  * @Autor: qinghui
  * @Date: 2021-12-12 14:17:02
  * @LastEditors: qinghui
- * @LastEditTime: 2021-12-12 17:09:27
+ * @LastEditTime: 2021-12-26 12:39:53
  */
 import { Controller } from 'egg';
-import { CreateColumns } from '../../interface/blog';
+import { CreateColumns, UpDataColumns } from '../../interface/blog';
 import Validators from '../../validators/validators';
 
-import { columnRule } from '../../rule/blog';
+import { columnRule, upDatacolumnRule } from '../../rule/blog';
 /**
  * @Controller 专栏信息
  */
 export default class ColumnsController extends Controller {
   public async createColumns() {
     const { ctx } = this;
-    console.log('123');
+
     const column: CreateColumns = this.ctx.request.body;
     // 验证参数
-    console.log(column);
+
     new Validators(ctx).parameter(columnRule);
     await ctx.service.blog.column.creatColumn(column);
+  }
+
+  public async seachColumns() {
+    const { ctx } = this;
+
+    await ctx.service.blog.column.getAllColumn();
+  }
+
+  public async changeColumns() {
+    const { ctx } = this;
+    const column: UpDataColumns = this.ctx.request.body;
+    new Validators(ctx).parameter(upDatacolumnRule);
+    await ctx.service.blog.column.changeColumns(column);
   }
 }

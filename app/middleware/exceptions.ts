@@ -4,18 +4,20 @@
  * @Autor: qinghui
  * @Date: 2021-12-04 09:43:34
  * @LastEditors: qinghui
- * @LastEditTime: 2021-12-11 14:11:33
+ * @LastEditTime: 2021-12-26 12:09:27
  */
 import { ParameterError } from '../interface/general';
 class HttpExceptions extends Error {
   public code: number;
   public msg: string;
+  public errsInfo: any[];
 
-  public data: any ;
-  constructor(msg = '服务器出错误了', code = 1, data?) {
+  public data: any;
+  constructor(msg = '服务器出错误了', code = 1, data?, errsInfo?) {
     super();
     this.code = code;
     this.msg = msg;
+    this.errsInfo = errsInfo;
 
     this.data = data || null;
   }

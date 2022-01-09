@@ -3,11 +3,13 @@
 
 import 'egg';
 import ExportColumns from '../../../app/model/columns';
+import ExportPost from '../../../app/model/post';
 import ExportUser from '../../../app/model/user';
 
 declare module 'egg' {
   interface IModel {
     Columns: ReturnType<typeof ExportColumns>;
+    Post: ReturnType<typeof ExportPost>;
     User: ReturnType<typeof ExportUser>;
   }
 }

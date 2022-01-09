@@ -4,7 +4,7 @@
  * @Autor: qinghui
  * @Date: 2021-12-12 20:01:10
  * @LastEditors: qinghui
- * @LastEditTime: 2021-12-12 20:16:21
+ * @LastEditTime: 2021-12-14 20:45:26
  */
 export default function(app: { mongoose: any }) {
   const mongoose = app.mongoose;
@@ -24,6 +24,7 @@ export default function(app: { mongoose: any }) {
       type: Date,
       default: Date.now(),
     },
+
   });
 
   const ColumnModel = mongoose.model('column', ColumnSchema);
